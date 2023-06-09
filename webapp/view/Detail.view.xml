@@ -3,7 +3,8 @@
     xmlns="sap.m"
     xmlns:semantic="sap.f.semantic"
     xmlns:f="sap.ui.layout.form"
-    xmlns:mvc="sap.ui.core.mvc">
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
 
     <semantic:SemanticPage
         id="detailPage"
@@ -53,8 +54,11 @@
                     <Label text="Movement Id" visible="{= !${detailView>/new} }" />
                     <Text text="{Id}" visible="{= !${detailView>/new} }" />
                     <Label text="Type" />
-                    <Input value="{Type}"/>
-
+                    <ComboBox selectedKey="{Type}">
+                        <core:ListItem key="IN" text="IN" />
+                        <core:ListItem key="OUT" text="OUT" />
+                        <core:ListItem key="I/O" text="I/O" />
+                    </ComboBox>
                     <Label text="Movement Date" />
                     <DatePicker
 					value="{
@@ -87,7 +91,12 @@
                     <Label text="Partner" />
                     <Input value="{Partner}" />
                     <Label text="Location" />
-                    <Input value="{Location}" />
+                    <ComboBox selectedKey="{Location}">
+                        <core:ListItem key="NOORD" text="NOORD" />
+                        <core:ListItem key="LICHT" text="LICHT" />
+                        <core:ListItem key="ELLER" text="ELLER" />
+                        <core:ListItem key="VIADU" text="VIADU" />
+                    </ComboBox>
                     <Label text="Finished" />
                     <CheckBox selected="{Finished}"/>
                     

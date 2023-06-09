@@ -2,7 +2,9 @@
     controllerName="be.ap.sap.movementsapp.controller.List"
     xmlns="sap.m"
     xmlns:semantic="sap.f.semantic"
-    xmlns:mvc="sap.ui.core.mvc">
+    xmlns:filterbar="sap.ui.comp.filterbar"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
 
     <semantic:SemanticPage
         id="listPage"
@@ -52,6 +54,7 @@
                                     priority="NeverOverflow"/>
                             </layoutData>
                         </SearchField>
+
                         <ToolbarSpacer/>
                         <Button
                             id="sortButton"

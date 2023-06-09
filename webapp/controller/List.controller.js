@@ -174,7 +174,7 @@ sap.ui.define([
             aSorters.push(new Sorter(sPath, bDescending));
             this._oList.getBinding("items").sort(aSorters);
         },
-        
+              
         /**
          * Event handler for the list selection event
          * @param {sap.ui.base.Event} oEvent the list selectionChange event
