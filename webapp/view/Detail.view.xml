@@ -1,0 +1,140 @@
+<mvc:View
+    controllerName="be.ap.sap.movementsapp.controller.Detail"
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc">
+
+    <semantic:SemanticPage
+        id="detailPage"
+        busy="{detailView>/busy}"
+        busyIndicatorDelay="{detailView>/delay}"
+        showFooter="true">
+        <semantic:titleHeading>
+            <Title
+                text="{Id}"
+                level="H2"/>
+        </semantic:titleHeading>
+        <semantic:content>
+
+        </semantic:content>
+        <!--Semantic ShareMenu Buttons-->
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction
+                id="shareEmail"
+                press=".onSendEmailPress"/>
+        </semantic:sendEmailAction>
+
+        <semantic:closeAction>
+            <semantic:CloseAction
+                    id="closeColumn"
+                    press=".onCloseDetailPress"/>
+        </semantic:closeAction>
+
+        <semantic:fullScreenAction>
+            <semantic:FullScreenAction
+                    id="enterFullScreen"
+                    visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                    press=".toggleFullScreen"/>
+        </semantic:fullScreenAction>
+        <semantic:exitFullScreenAction>
+            <semantic:ExitFullScreenAction
+                    id="exitFullScreen"
+                    visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                    press=".toggleFullScreen"/>
+        </semantic:exitFullScreenAction>
+        <semantic:content>
+
+        <VBox>
+            <f:SimpleForm>
+                <f:content>
+                    <Label text="Movement Id" visible="{detailView>/new}" />
+                    <Input value="{Id}" visible="{detailView>/new}" />
+                    <Label text="Movement Id" visible="{= !${detailView>/new} }" />
+                    <Text text="{Id}" visible="{= !${detailView>/new} }" />
+                    <Label text="Type" />
+                    <Input value="{Type}"/>
+
+                    <Label text="Movement Date" />
+                    <DatePicker
+					value="{
+						'path':'MovDate',
+						'type':'sap.ui.model.odata.type.DateTime',
+						'formatOptions': {
+							'pattern': 'yyyy-MM-dd'
+						}
+					}"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"/>
+                    <Label text="Creation Date" visible="{detailView>/new}" />
+                    <DatePicker
+					value="{
+						'path':'ChgDate',
+						'type':'sap.ui.model.odata.type.DateTime',
+						'formatOptions': {
+							'pattern': 'yyyy-MM-dd'
+						}
+					}"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"
+                    visible="{detailView>/new}"/>
+                    <Label text="Creation Date" visible="{= !${detailView>/new} }" />
+                    <Text text="{ChgDate}" visible="{= !${detailView>/new} }" />
+                    <Label text="User" visible="{detailView>/new}"/>
+                    <Input value="{ChgUser}" visible="{detailView>/new}" />
+                    <Label text="User" visible="{= !${detailView>/new} }" />
+                    <Text text="{ChgUser}" visible="{= !${detailView>/new} }" />
+                    <Label text="Partner" />
+                    <Input value="{Partner}" />
+                    <Label text="Location" />
+                    <Input value="{Location}" />
+                    <Label text="Finished" />
+                    <CheckBox selected="{Finished}"/>
+                    
+                </f:content>
+            </f:SimpleForm>
+            <Table inset="false" items="{ path: 'ToMov_Item' }">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <content>
+                                <Title text="{i18n>MovItem}" level="H2"/>
+                            </content>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="ItemId" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="MateriaalNr" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="Hoeveelheid" />
+                        </Column>
+                        <Column hAlign="End">
+                            <Text text="Eenheid" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem vAlign="Middle">
+                            <cells>
+                                <ObjectIdentifier title="{ItemId}" text="{Item_Id}"/>
+                                <ObjectNumber number="{Matnr}" unit="{movement}" />
+                                <ObjectNumber number="{Umziz}" unit="{movement}" />
+                                <ObjectNumber number="{Meins}" unit="{movement}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+</VBox>
+        </semantic:content>
+
+        <semantic:footerCustomActions>
+			<Button text="Save" press="onSave" />
+            <Button text="Delete" press="onDelete" visible="{= !${detailView>/new} }"/>
+			<Button text="Cancel" press="onCancel" visible="{detailView>/new}"/>
+        </semantic:footerCustomActions>
+
+    </semantic:SemanticPage>
+
+</mvc:View>
